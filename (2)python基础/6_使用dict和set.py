@@ -37,8 +37,8 @@ print(str(s));
 #set的交集
 s1 = set([1,2,3,4]);
 s2 = set([3,4,5,6]);
-s3 = s1 & s2;
-s4 = s1 | s2;
+s3 = s1 & s2;#交集
+s4 = s1 | s2;#并集
 print(s3,s4);
 
 #尝试将list放入set
