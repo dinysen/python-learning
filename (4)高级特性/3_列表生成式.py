@@ -21,6 +21,7 @@ print(str(L5));
 
 #exercise
 #如果list中既包含字符串，又包含整数，由于非字符串类型没有lower()方法，所以列表生成式会报错：
+#请让他能够顺利显示出来
 
 L1_exe = ['Hello', 'World', 18, 'Apple', None];
 L2_exe = [s.lower() for s in L1_exe if isinstance(s,str)];
