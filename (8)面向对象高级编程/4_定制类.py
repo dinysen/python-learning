@@ -66,3 +66,99 @@ class Fib(object):
 f = Fib();
 print(f[100]);
 print(f[5:10]);
+
+#__getattr__
+#当获取一个实例的属性不存在时，会进入__getattr__方法查找
+class Student(object):
+	def __init__(self,name):
+		self._name = name;
+
+	def __getattr__(self,attr):
+		if "score" == attr:
+			return 99;
+		elif "func" == attr:
+			return lambda : 99;
+		raise AttributeError("此实例没有属性%s" % attr);
+
+s = Student("Delton");
+print(s._name);
+print(s.score);
+print(s.func,s.func());
+#print(s.aa);
+
+#__getattr__的使用场景
+#组成restapi的调用地址
+#例：
+class Chain(object):
+	def __init__(self,path=''):
+		self._path = path;
+
+	def __getattr__(self,path):
+		return Chain("%s/%s" % (self._path,path));
+
+	def __str__(self):
+		return self._path;
+
+	__repr__ = __str__;
+
+h1 = Chain().status.user.timeline.list;
+print(h1);
+
+class Chain_2(object):
+	def __init__(self,path=''):
+		self._path = path;
+
+	def users(self,param):
+		return Chain_2("%s/%s" % (self._path,"users/"+param));
+
+	def __getattr__(self,attr):
+		if "users" == attr:
+			return _funcattr;
+		else:
+			return Chain_2("%s/%s" % (self._path,attr));
+
+	def __str__(self):
+		return self._path;
+
+	__repr__ = __str__;
+
+h2 = Chain_2().users('michael').repos;
+print(h2);
+
+#__call__
+#除了实例的方法能够被调用，实例本身是否能被调用呢
+#这在python中是可行的，只需要在class或实例中定义__call__方法
+class Teacher(object):
+	def __init__(self):
+		pass;
+
+	def __call__(self):
+		return "Hello Guys";
+
+t = Teacher();
+print(t());
+
+#这样做，我们就模糊了实例和函数的界限，所以在python中更重要的
+#是知道一个对象是不是可以被调用，我们称作为callable
+print(callable(Teacher()));
+print(callable(max));
+print(callable([1,2,3]));
+
+#利用__call__方法再次挑战上面的restful接口地址拼接
+class Chain_3(object):
+	def __init__(self,path=''):
+		self._path = path;
+
+	def __getattr__(self,attr):
+		return Chain_3("%s/%s" % (self._path,attr));
+
+	def __call__(self,attr):
+		return Chain_3("%s/%s" % (self._path,attr));
+
+	def __str__(self):
+		return self._path;
+
+	__repr__ = __str__;
+c3 = Chain_3().users('michael').repos;
+print(c3);
+
