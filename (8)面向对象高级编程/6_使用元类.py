@@ -18,4 +18,24 @@ h.hello();
 h.hello('Alice');
 
 
+#metaclass
+#定义一个元类
+class ListMetaclass(type):
+	#当前准备创建的类的对象
+	#类的名字
+	#类继承的父类集合
+	#类的方法集合
+	def __new__(cls,name,bases,attrs):
+		print(name);
+		attrs["add"] = lambda self,value : self.append(value);
+		return type.__new__(cls,name,bases,attrs);
+
+#使用元类来定制类（还有一段没看懂）
+class MyList(list,metaclass=ListMetaclass):
+	pass;
+
+l = MyList();
+print(str(l));
+l.add("1");
+print(str(l));
 
