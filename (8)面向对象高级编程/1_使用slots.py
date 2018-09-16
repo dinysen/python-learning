@@ -39,7 +39,7 @@ s3 = Student2();
 s3.name = 'AAA';
 s3.age = 'bbb';
 
-#如果子类没有__slots__属性，说明父类的__slots__属性对子类没有影响
+#如果子类没有__slots__属性，父类的__slots__属性对子类没有影响
 class subStu(Student2):
 	pass;
 sub = subStu();
