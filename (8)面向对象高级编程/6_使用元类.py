@@ -6,7 +6,7 @@
 #也就意味着在运行时，我们能够通过某种方法动态的创建类
 #这个方法就是type()函数
 #例
-def fn(self,name='Delton'):
+def fn(self,name='Dalton'):
 	print("Hello,%s" % name);
 
 #type()函数的第一个参数是class的名称
