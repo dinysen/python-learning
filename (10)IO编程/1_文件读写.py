@@ -30,3 +30,50 @@ with open('D:/develop/phython/workspace/python-learning/(1)第一个python程序
 #读取二进制文件
 with open('E:/图片/壁纸/14521620577052.jpg','rb') as f:
 	print(f.read());
+
+#字符编码
+#要读取非UTF-8编码的文本文件，需要给open()函数传入encoding参数
+#例如读取gbk编码的文件
+#遇到某些编码不规范的文件，你可能遇到UnicodeDecodeError错误
+#open()方法还接受一个errors参数，表示遇到错误后如何处理，最简单的就是'ignore'忽略错误
+with open('D:/develop/phython/workspace/python-learning/(1)第一个python程序/test.py','r',encoding='gbk',errors='ignore') as f:
+	print(f.read());
+
+#写文件
+#'w'表示写，'a'表示追加(也会自动创建文件)
+with open('D:/develop/phython/workspace/python-learning/(test)测试/aa.txt','a',encoding='utf-8') as f:
+	f.write("abdfsafasdc");
+	
+#with...as...语法的说明
+class controlled_execution:
+	def __enter__(self):
+#		set things up
+#		return thing
+		pass;
+
+	def __exit__(self, type, value, traceback):
+#		tear things down
+#		当要跳过一个异常时
+#		就让__exit__函数返回false即可
+#例如：	return isinstance(value,TypeError);就是跳过所有TypeError
+		pass;
+
+with controlled_execution() as thing:
+#		do something
+		pass;
+
+#with...as...也可处理多个项
+#例如:
+with open("x.txt") as f1, open('xxx.txt') as f2:
+#	do something with f1,f2
+	pass;
+
+#我们可以在__exit__中处理一些异常情况，如果未处理，则会抛出
+#如:
+try:
+	with open( "a.txt" ) as f :
+#		do something
+		pass;
+except xxxError:
+#		do something about exception
+
