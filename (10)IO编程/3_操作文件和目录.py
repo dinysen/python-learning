@@ -50,7 +50,7 @@ print([x for x in os.listdir(".") if os.path.isfile(x) and os.path.splitext(x)[1
 
 #exercise
 #利用os模块编写一个能实现dir -l输出的程序。
-print([dirpath for dirpath in os.walk("D:/develop/phython/workspace/python-learning")]);
+print([dirpath for dirpath in os.walk("D:/develop/phython/workspace/python-learning") if  ]);
 
 
 #编写一个程序，能在当前目录以及当前目录的所有子目录下查找文件名包含指定字符串的文件，并打印出相对路径。

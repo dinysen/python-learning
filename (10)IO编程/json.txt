@@ -1,0 +1,5 @@
+{
+	name : "Dalton",
+	age : 26,
+	gender : "男"
+}
